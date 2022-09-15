@@ -1,0 +1,3 @@
+---
+# defaults file for zulip_role
+ansible_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
