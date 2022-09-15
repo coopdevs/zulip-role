@@ -2,22 +2,26 @@
 # tasks file for zulip_role
 
 - name: Download zulip_installer
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ ansible_installer }}"
     dest: /tmp/zulip_installer.tar.gz
     mode: 0755
   tags: ['zulip']
 
 - name: Extract downloaded installer
-  tar:
+  ansible.builtin.tar:
     src: /tmp/zulip_installer.tar.gz
     dest: /tmp/
     mode: 0755
   tags: ['zulip']
 
 
-- name: Execute zulip_installer with root
+- name: Execute zulip_installer as root
   become: true
   become_user: root
-  shell: ./zulip-server-*/scripts/setup/install --certbot --hostname={{ host_name }} --email={{ email }}
+  ansible.builtin.shell: |
+   ./zulip-server-*/scripts/setup/install
+   --certbot --hostname={{ host_name }} --email={{ email }}
+  register: installer_output
+  changed_when: installer_output.rc != 0
   tags: ['zulip']
