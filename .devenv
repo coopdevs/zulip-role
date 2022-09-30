@@ -1,0 +1,12 @@
+# File created with devenv init command
+
+NAME="zulip"
+DISTRIBUTION="ubuntu"
+RELEASE="jammy"
+ARCH="amd64"
+HOST="zulip.local"
+
+# Optional -- To create a new user and group
+
+# Select the python interpeter python2.7 or python3
+PYTHON_INTERPRETER=python3
