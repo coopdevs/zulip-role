@@ -10,6 +10,7 @@ Role Variables
 --------------
 
 ```yaml
+development_enviroment: false
 host_name: example.com
 email: example@example.com
 ansible_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
