@@ -1,0 +1,13 @@
+---
+- name: Install certbot
+  ansible.builtin.package:
+    name: certbot
+    state: present
+  when: not development_enviroment
+
+- name: "Register certbot account"
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: "certbot register --email {{ email }} --agree-tos"
+  when: not development_enviroment

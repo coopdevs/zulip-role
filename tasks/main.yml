@@ -15,6 +15,19 @@
     remote_src: true
   tags: ['zulip']
 
+- name: Check if certbot is installed
+  ansible.builtin.package:
+    name: certbot
+    state: present
+  check_mode: true
+  register: certbot_check
+  when: not development_enviroment
+
+- name: Certbot tasks
+  ansible.builtin.import_tasks: certbot.yml
+  when: not development_enviroment and not certbot_check
+  tags: ['certbot', 'zulip']
+
 - name: Execute zulip_installer as root
   become: true
   become_user: root
