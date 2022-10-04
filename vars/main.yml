@@ -1,5 +1,2 @@
 ---
 # vars file for zulip_role
-host_name: example.com
-email: example@example.com
-development_enviroment: false

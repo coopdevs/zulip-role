@@ -1,3 +1,8 @@
 ---
 # defaults file for zulip_role
 ansible_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
+host_name: example.com
+email: example@example.com
+development_enviroment: false
+ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-cert'}}"
+installer_args: " --email={{email}} --hostname={{host_name}} {{ ssl }}"
