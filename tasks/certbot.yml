@@ -9,5 +9,5 @@
   become: true
   become_user: root
   ansible.builtin.command:
-    cmd: "certbot register --email {{ email }} --agree-tos"
+    cmd: "certbot register --email {{ email }} --agree-tos --eff-email"
   when: not development_enviroment
