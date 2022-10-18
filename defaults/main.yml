@@ -6,5 +6,7 @@ email: example@example.com
 development_enviroment: false
 ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-cert' }}"
 # TODO: Check programatically if ssl cert issue is needed
-# Meanwhile, set `ssl` to an empty string if already there is a valid SSL certificate
+# Meanwhile, set `ssl` to an empty string if a valid certificate is present
 installer_args: " --email={{ email }} --hostname={{ host_name }} {{ ssl }}"
+zulip_push_notifications: true
+zulip_push_bouncer_url: "https://push.zulipchat.com"

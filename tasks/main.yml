@@ -37,3 +37,9 @@
   register: installer_output
   changed_when: installer_output.rc != 0
   tags: ['zulip']
+
+- name: Configure push notifications
+  include_tasks:
+    file: push.yml
+  when: zulip_push_notifications
+  tags: ['zulip', 'push']

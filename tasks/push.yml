@@ -1,0 +1,9 @@
+---
+- name: "Configure push notifications"
+  ansible.builtin.replace:
+    path: /etc/zulip/settings.py
+    regexp: '# PUSH_NOTIFICATION_BOUNCER_URL = "https://push.zulipchat.com"'
+    replace: 'PUSH_NOTIFICATION_BOUNCER_URL = "{{ zulip_push_bouncer_url }}"'
+  notify: "apply push conf"
+  when: zulip_push_notifications
+  tags: ['zulip', 'push']
