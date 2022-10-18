@@ -19,5 +19,9 @@
     regexp: '^email_password.*$'
     line: email_password = {{ zulip_email_password }}
     create: true
+    owner: zulip
+    group: zulip
+    mode: '0640'
+  become_user: zulip
   notify: restart zulip server
   tags: ['zulip', 'email']
