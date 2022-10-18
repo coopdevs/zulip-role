@@ -49,3 +49,9 @@
     file: mail.yml
   when: zulip_enable_mail
   tags: ['zulip', 'mail']
+
+- name: Configure GIPHY integration
+  include_tasks:
+    file: giphy.yml
+  when: zulip_enable_giphy
+  tags: ['zulip', 'giphy']

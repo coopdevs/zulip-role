@@ -14,3 +14,5 @@ zulip_enable_mail: true
 zulip_smtp_server:
 zulip_email_user:
 zulip_email_password:
+zulip_enable_giphy: true
+zulip_giphy_api_key: "GIPHY:APY:KEY"
