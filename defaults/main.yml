@@ -1,18 +1,18 @@
 ---
 # defaults file for zulip_role
-ansible_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
-host_name: example.com
-email: example@example.com
+zulip_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
+zulip_hostname: example.com
+cerbot_email: example@example.com
 development_enviroment: false
-ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-cert' }}"
+certbot_ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-cert' }}"
 # TODO: Check programatically if ssl cert issue is needed
-# Meanwhile, set `ssl` to an empty string if a valid certificate is present
-installer_args: " --email={{ email }} --hostname={{ host_name }} {{ ssl }}"
+# Meanwhile, set `certbot_ssl` to an empty string if a valid certificate is present
+installer_args: " --email={{ cerbot_email }} --hostname={{ zulip_hostname }} {{ certbot_ssl }}"
 zulip_push_notifications: true
 zulip_push_bouncer_url: "https://push.zulipchat.com"
 zulip_enable_mail: true
 zulip_smtp_server:
-zulip_email_user:
-zulip_email_password:
+zulip_sendmail_user:
+zulip_sendmail_password:
 zulip_enable_giphy: true
 zulip_giphy_api_key: "GIPHY:APY:KEY"

@@ -3,7 +3,7 @@
 
 - name: Download zulip_installer
   ansible.builtin.get_url:
-    url: "{{ ansible_installer }}"
+    url: "{{ zulip_installer }}"
     dest: /tmp/zulip_installer.tar.gz
     mode: 0755
   tags: ['zulip']
