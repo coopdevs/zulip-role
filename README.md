@@ -5,6 +5,8 @@ An ansible role to install Zulip using the [Zulip installer](https://zulip.readt
 
 The Zulip installer takes care of installing all dependencies and configure them.
 
+This Ansible role is designed to check for the existence of any active Zulip realms before proceeding with the installation or update process. If an active realm is detected, the role will automatically update your Zulip installation to ensure compatibility and seamless integration with existing realms. This approach helps maintain the stability of your Zulip environment and minimizes potential disruptions to your users.
+
 
 Role Variables
 --------------
@@ -12,7 +14,8 @@ Role Variables
 ```yaml
 development_enviroment: false
 zulip_hostname: example.com
-zulip_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
+zulip_version: latest
+zulip_installer: "https://download.zulip.com/server/zulip-server-{{ zulip_version }}.tar.gz"
 cerbot_email: example@example.com
 certbot_ssl: ''
 zulip_push_notifications: true
@@ -22,7 +25,7 @@ zulip_smtp_server:
 zulip_sendmail_user:
 zulip_sendmail_password:
 zulip_enable_giphy: true
-zulip_giphy_api_key: 
+zulip_giphy_api_key:
 ```
 
 The `certbot_ssl` parameter is automatically configured based on the `development_enviroment` parameter. If there is already a valid SSL certificate, you must set it manually to an empty string. The valid values are either `''`, `--certbot` or `--self-signed`. `cerbot_email` must be provided in order to issue a certificate request using certbot.

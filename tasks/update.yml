@@ -1,0 +1,17 @@
+---
+- name: "Download Zulip {{ zulip_version }}"
+  ansible.builtin.get_url:
+    url: "{{ zulip_installer }}"
+    dest: "/tmp/zulip_installer-{{ zulip_version }}.tar.gz"
+    mode: 0755
+  tags: ['zulip']
+
+- name: Update Zulip if realms exist
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: >
+      /home/zulip/deployments/current/scripts/upgrade-zulip
+      /tmp/zulip_installer-{{ zulip_version }}.tar.gz
+    executable: /bin/bash
+  when: zulip_realms_exist

@@ -1,57 +1,27 @@
 ---
 # tasks file for zulip_role
 
-- name: Download zulip_installer
-  ansible.builtin.get_url:
-    url: "{{ zulip_installer }}"
-    dest: /tmp/zulip_installer.tar.gz
-    mode: 0755
-  tags: ['zulip']
-
-- name: Extract downloaded installer
-  ansible.builtin.unarchive:
-    src: /tmp/zulip_installer.tar.gz
-    dest: /tmp/
-    remote_src: true
-  tags: ['zulip']
-
-- name: Check if certbot is installed
-  ansible.builtin.package:
-    name: certbot
-    state: present
-  check_mode: true
-  register: certbot_check
-  when: not development_enviroment
-
 - name: Certbot tasks
   ansible.builtin.import_tasks: certbot.yml
-  when: not development_enviroment and not certbot_check
+  when: not development_enviroment
   tags: ['certbot', 'zulip']
 
-- name: Execute zulip_installer as root
-  become: true
-  become_user: root
-  ansible.builtin.shell:
-    cmd: ./zulip-server-*/scripts/setup/install {{ installer_args }}
-    chdir: /tmp/
-  register: installer_output
-  changed_when: installer_output.rc != 0
+# Check if a company is configured
+- name: Check Zulip state
+  ansible.builtin.import_tasks: check.yml
   tags: ['zulip']
 
-- name: Configure push notifications
-  ansible.builtin.include_tasks:
-    file: push.yml
-  when: zulip_push_notifications
-  tags: ['zulip', 'push']
+# If zulip_realms_exist update else install
+- name: Install Zulip
+  ansible.builtin.import_tasks: install.yml
+  when: not zulip_realms_exist
+  tags: ['zulip']
 
-- name: Configure mail notifications
-  ansible.builtin.include_tasks:
-    file: mail.yml
-  when: zulip_enable_mail
-  tags: ['zulip', 'mail']
+- name: Update Zulip
+  ansible.builtin.import_tasks: update.yml
+  when: zulip_realms_exist
+  tags: ['zulip']
 
-- name: Configure GIPHY integration
-  ansible.builtin.include_tasks:
-    file: giphy.yml
-  when: zulip_enable_giphy
-  tags: ['zulip', 'giphy']
+- name: Configure Zulip
+  ansible.builtin.import_tasks: configure.yml
+  tags: ['zulip']
