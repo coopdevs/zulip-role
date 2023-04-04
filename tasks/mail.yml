@@ -2,21 +2,21 @@
 - name: "Configure outgoing email server"
   ansible.builtin.replace:
     path: /etc/zulip/settings.py
-    regexp: '# EMAIL_HOST = "smtp.example.com"'
+    regexp: '^(#)?\s*EMAIL_HOST\s*=.*$'
     replace: 'EMAIL_HOST = "{{ zulip_smtp_server }}"'
   tags: ['zulip', 'email']
 
 - name: "Configure outgoing email user"
   ansible.builtin.replace:
     path: /etc/zulip/settings.py
-    regexp: '# EMAIL_HOST_USER = ""'
+    regexp: '^(#)?\s*EMAIL_HOST_USER\s*=.*$'
     replace: 'EMAIL_HOST_USER = "{{ zulip_sendmail_user }}"'
   tags: ['zulip', 'email']
 
 - name: "Configure outgoing email password"
   ansible.builtin.lineinfile:
     path: /etc/zulip/zulip-secrets.conf
-    regexp: '^email_password.*$'
+    regexp: '^email_password\s*=.*$'
     line: email_password = {{ zulip_sendmail_password }}
     create: true
     owner: zulip
