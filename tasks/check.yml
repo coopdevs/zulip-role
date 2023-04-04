@@ -1,0 +1,24 @@
+---
+- name: Check if /home/zulip/deployments/current exists
+  ansible.builtin.stat:
+    path: /home/zulip/deployments/current
+  register: zulip_current_directory
+
+- name: Check for existing Zulip realms
+  ansible.builtin.command:
+    cmd: ./manage.py list_realms
+    chdir: /home/zulip/deployments/current
+    executable: /bin/bash
+  become: true
+  become_user: zulip
+  register: zulip_realms_output
+  when: zulip_current_directory.stat.exists
+
+- name: Extract realm names
+  ansible.builtin.set_fact:
+    zulip_realms: "{{ zulip_realms_output.stdout_lines[2:] | map('regex_search', '\\S+$') | select('defined') | list }}"
+  when: zulip_current_directory.stat.exists
+
+- name: Check if Zulip realms exist
+  ansible.builtin.set_fact:
+    zulip_realms_exist: "{{ zulip_realms | default(false) }}"

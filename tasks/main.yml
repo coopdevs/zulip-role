@@ -6,10 +6,15 @@
   when: not development_enviroment
   tags: ['certbot', 'zulip']
 
+# Check if a company is configured
+- name: Check Zulip state
+  ansible.builtin.import_tasks: check.yml
+  tags: ['zulip']
 
 # If zulip_realms_exist update else install
 - name: Install Zulip
   ansible.builtin.import_tasks: install.yml
+  when: not zulip_realms_exist
   tags: ['zulip']
 
 
