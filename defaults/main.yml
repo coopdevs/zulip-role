@@ -1,6 +1,7 @@
 ---
 # defaults file for zulip_role
-zulip_installer: https://download.zulip.com/server/zulip-server-latest.tar.gz
+zulip_version: "latest"
+zulip_installer: "https://download.zulip.com/server/zulip-server-{{ zulip_version }}.tar.gz"
 zulip_hostname: example.com
 cerbot_email: example@example.com
 development_enviroment: false
@@ -16,3 +17,4 @@ zulip_sendmail_user:
 zulip_sendmail_password:
 zulip_enable_giphy: true
 zulip_giphy_api_key: "GIPHY:APY:KEY"
+pip_requirements: ['pexpect==4.8.0']
