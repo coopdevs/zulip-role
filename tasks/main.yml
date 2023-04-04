@@ -24,4 +24,4 @@
 
 - name: Configure Zulip
   ansible.builtin.import_tasks: configure.yml
-  tags: ['zulip']
+  tags: ['configure', 'zulip']
