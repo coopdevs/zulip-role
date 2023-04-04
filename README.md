@@ -17,7 +17,8 @@ zulip_hostname: example.com
 zulip_version: latest
 zulip_installer: "https://download.zulip.com/server/zulip-server-{{ zulip_version }}.tar.gz"
 cerbot_email: example@example.com
-certbot_ssl: ''
+certbot_ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-cert' }}"
+installer_args: " --email={{ cerbot_email }} --hostname={{ zulip_hostname }} {{ certbot_ssl }}"
 zulip_push_notifications: true
 zulip_push_bouncer_url: "https://push.zulipchat.com"
 zulip_enable_mail: true
