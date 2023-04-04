@@ -2,7 +2,7 @@
 - name: "Configure GIPHY API key"
   ansible.builtin.replace:
     path: /etc/zulip/settings.py
-    regexp: '# GIPHY_API_KEY = "<Your API key from GIPHY>"'
+    regexp: '^(#)?\s*GIPHY_API_KEY\s*=.*$"'
     replace: 'GIPHY_API_KEY = "{{ zulip_giphy_api_key }}"'
   notify: "restart zulip server"
   tags: ['zulip', 'giphy']
