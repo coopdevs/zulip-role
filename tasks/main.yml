@@ -30,20 +30,8 @@
   changed_when: installer_output.rc != 0
   tags: ['zulip']
 
-- name: Configure push notifications
-  ansible.builtin.include_tasks:
-    file: push.yml
-  when: zulip_push_notifications
-  tags: ['zulip', 'push']
 
-- name: Configure mail notifications
-  ansible.builtin.include_tasks:
-    file: mail.yml
-  when: zulip_enable_mail
-  tags: ['zulip', 'mail']
 
-- name: Configure GIPHY integration
-  ansible.builtin.include_tasks:
-    file: giphy.yml
-  when: zulip_enable_giphy
-  tags: ['zulip', 'giphy']
+- name: Configure Zulip
+  ansible.builtin.import_tasks: configure.yml
+  tags: ['zulip']
