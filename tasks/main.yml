@@ -17,6 +17,10 @@
   when: not zulip_realms_exist
   tags: ['zulip']
 
+- name: Update Zulip
+  ansible.builtin.import_tasks: update.yml
+  when: zulip_realms_exist
+  tags: ['zulip']
 
 - name: Configure Zulip
   ansible.builtin.import_tasks: configure.yml
