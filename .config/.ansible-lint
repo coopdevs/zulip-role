@@ -1,4 +1,5 @@
 warn_list:  # or 'skip_list' to silence them completely
   - no-changed-when  # Commands should not change things if nothing needs do
-mock_roles:
-  - zulip_role
+exclude_paths:
+  - .cache/ # implicit unless exclude_paths is defined in config
+  - tests/
