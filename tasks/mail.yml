@@ -22,6 +22,7 @@
     owner: zulip
     group: zulip
     mode: '0640'
+  become: true
   become_user: zulip
   notify: restart zulip server
   tags: ['zulip', 'email']

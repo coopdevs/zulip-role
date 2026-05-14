@@ -9,7 +9,7 @@
   ansible.builtin.get_url:
     url: "{{ zulip_installer }}"
     dest: "/tmp/zulip_installer-{{ zulip_version }}.tar.gz"
-    mode: 0755
+    mode: '0755'
   tags: ['zulip']
 
 - name: Extract downloaded installer

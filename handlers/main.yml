@@ -14,3 +14,4 @@
   ansible.builtin.command: /home/zulip/deployments/current/scripts/restart-server
   become: true
   become_user: zulip
+  changed_when: false

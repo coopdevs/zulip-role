@@ -18,3 +18,4 @@
   ansible.builtin.command:
     cmd: "certbot register --email {{ cerbot_email }} --agree-tos --eff-email"
   when: not certbot_check
+  changed_when: false

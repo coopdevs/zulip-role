@@ -3,10 +3,10 @@
   ansible.builtin.get_url:
     url: "{{ zulip_installer }}"
     dest: "/tmp/zulip_installer-{{ zulip_version }}.tar.gz"
-    mode: 0755
+    mode: '0755'
   tags: ['zulip']
 
-- name: Update Zulip if realms exist
+- name: Update Zulip if realms exist # noqa no-changed-when
   become: true
   become_user: root
   ansible.builtin.command:

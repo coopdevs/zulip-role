@@ -13,6 +13,7 @@
   become_user: zulip
   register: zulip_realms_output
   when: zulip_current_directory.stat.exists
+  changed_when: false
 
 - name: Extract realm names
   ansible.builtin.set_fact:
