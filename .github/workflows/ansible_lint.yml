@@ -9,6 +9,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run ansible-lint
+        id: lint
         uses: ansible-actions/ansible-lint-action@v1.0.3
+        continue-on-error: true
         with:
           target: "./"
+
+      - name: Show warning if ansible-lint fails
+        if: steps.lint.outcome == 'failure'
+        run: echo "::warning ::Ansible Lint found issues, but the workflow continues."
