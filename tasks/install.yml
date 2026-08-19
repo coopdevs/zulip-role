@@ -1,4 +1,9 @@
 ---
+- name: apt update
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: true
+
 - name: Download zulip_installer
   ansible.builtin.get_url:
     url: "{{ zulip_installer }}"

@@ -10,7 +10,7 @@ certbot_ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-c
 # TODO: Check programatically if ssl cert issue is needed
 # Meanwhile, set `certbot_ssl` to an empty string if a valid certificate is present
 push_notifications: "{{ '--push-notifications' if zulip_push_notifications else ''}}"
-installer_args: " --email={{ cerbot_email }} --hostname={{ zulip_hostname }} {{ certbot_ssl }} {{ push_notificaions }}"
+installer_args: " --email={{ cerbot_email }} --hostname={{ zulip_hostname }} {{ certbot_ssl }} {{ push_notifications }} --agree-to-terms-of-service"
 zulip_push_bouncer_url: "https://push.zulipchat.com"
 zulip_enable_mail: true
 zulip_smtp_server:
