@@ -15,3 +15,4 @@
       /tmp/zulip_installer-{{ zulip_version }}.tar.gz
     executable: /bin/bash
   when: zulip_realms_exist
+  notify: "apply push conf"

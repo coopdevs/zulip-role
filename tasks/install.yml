@@ -1,9 +1,8 @@
 ---
-- name: Install pip requirements from list
-  ansible.builtin.pip:
-    name: "{{ item }}"
-  loop: "{{ pip_requirements }}"
-  tags: ['zulip']
+- name: apt update
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: true
 
 - name: Download zulip_installer
   ansible.builtin.get_url:

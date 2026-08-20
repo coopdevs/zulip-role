@@ -1,11 +1,9 @@
 ---
 # tasks file for zulip_role
-
 - name: Certbot tasks
   ansible.builtin.import_tasks: certbot.yml
   when: not development_enviroment
   tags: ['certbot', 'zulip']
-
 # Check if a company is configured
 - name: Check Zulip state
   ansible.builtin.import_tasks: check.yml

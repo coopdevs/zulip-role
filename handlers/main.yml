@@ -2,7 +2,7 @@
 - name: Configuring push notifications
   listen: apply push conf
   ansible.builtin.expect:
-    command: /home/zulip/deployments/current/manage.py register_server
+    command: /home/zulip/deployments/current/manage.py register_server --registration-transfer
     responses:
       (?i)Terms: "Y"
   notify: restart zulip server

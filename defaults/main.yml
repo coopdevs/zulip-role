@@ -5,11 +5,12 @@ zulip_installer: "https://download.zulip.com/server/zulip-server-{{ zulip_versio
 zulip_hostname: example.com
 cerbot_email: example@example.com
 development_enviroment: false
+zulip_push_notifications: true
 certbot_ssl: "{{ '--certbot' if not development_enviroment else '--self-signed-cert' }}"
 # TODO: Check programatically if ssl cert issue is needed
 # Meanwhile, set `certbot_ssl` to an empty string if a valid certificate is present
-installer_args: " --email={{ cerbot_email }} --hostname={{ zulip_hostname }} {{ certbot_ssl }}"
-zulip_push_notifications: true
+push_notifications: "{{ '--push-notifications' if zulip_push_notifications else ''}}"
+installer_args: " --email={{ cerbot_email }} --hostname={{ zulip_hostname }} {{ certbot_ssl }} {{ push_notifications }} --agree-to-terms-of-service"
 zulip_push_bouncer_url: "https://push.zulipchat.com"
 zulip_enable_mail: true
 zulip_smtp_server:
